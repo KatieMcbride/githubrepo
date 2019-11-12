@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/KatieMcbride/githubrepo/issues"
   },
-  "homepage": "https://github.com/KatieMcbride/githubrepo#readme"
+  "homepage": "https://github.com/KatieMcbride/githubrepo#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "fs": "0.0.1-security",
+    "html-pdf": "^2.2.0",
+    "inquirer": "^7.0.0",
+    "phantomjs": "^2.1.7",
+    "util": "^0.12.1"
+  }
 }
