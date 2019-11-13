@@ -27,6 +27,7 @@ inquirer
                 const publicRepos = res.data.public_repos;
                 const userName = res.data.login;
                 const avatar = res.data.avatar_url;
+                const location = res.data.location;
 
                  // generate static html 
                  const hcHtml = `
@@ -40,9 +41,10 @@ inquirer
                  </head>
                  <body>
                  <h1>${res.data.login}</h1>
-                 <img src="${res.data.avatar_url}"</img>
+                 <img src= "${res.data.avatar_url}"  height="200" width="200"></img>
                  <p>${res.data.public_repos}</p>
-                 <p>
+                 <a href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
+            
                  </body>
                  </html>`;
   
