@@ -7,6 +7,24 @@ const path = require("path");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+const createPDF = async () => {
+    const html5ToPDF = new HTML5ToPDF({
+      inputPath: path.join(__dirname, "./index.html"),
+      outputPath: path.join(__dirname, "./github.pdf"),
+      include: [
+        path.join(__dirname, "./styles.css")
+      ],
+      options: { printBackground: true } 
+    });
+
+    await html5ToPDF.start();
+    await html5ToPDF.build();
+    await html5ToPDF.close();
+    console.log("DONE");
+    process.exit(0);
+    };
+createPDF();
+
 inquirer
     .prompt([
         {
@@ -74,8 +92,9 @@ inquirer
       return writeFileAsync('index.html', hcHtml);
              
     })
-       
- })
+        
+
+ });
 
  
             
