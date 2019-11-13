@@ -2,7 +2,8 @@ const inquirer = require("inquirer");
 const axios = require("axios");
 const fs = require("fs");
 const util = require('util');
-const pdf = require('html-pdf');
+const HTML5ToPDF = require("html5-to-pdf");
+const path = require("path");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -38,26 +39,45 @@ inquirer
                  <meta charset="UTF-8">
                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                 <title>Document</title>
+                 <meta charset="utf-8">
+                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                 <link rel="stylesheet" type="text/css" href="./style.css" />
+                 <title>GitHub Repo Info</title>
                  </head>
                  <body>
-                 <h1>${res.data.login}</h1>
-                 <img src= "${res.data.avatar_url}"  height="200" width="200"></img>
-                 <p>${res.data.public_repos}</p>
-                 <a href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
-                 <a href ="https://github.com/${res.data.login}">GitHub Link</a>
-                 <a href ="${res.data.blog}">Blog Link</a>
-            
+                 <h1 class="gitHubName" >${res.data.login}</h1>
+                 <div class= "btnlinks">
+                    <a class ="button" href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
+                    <a class ="button" href ="https://github.com/${res.data.login}">GitHub Link</a>
+                     <a class ="button" href ="${res.data.blog}">Blog Link</a>
+                </div>
+                 <div class="imagePlacer">
+                    <img class="image" src= "${res.data.avatar_url}"  height="250" width="250"></img>
+                </div>    
+                
+                <div class="infolinks">
+                    <p class ="info">Bio: ${res.data.bio}</p>
+                </div>
+
+                <div class="infolinks">
+                    <p class ="info">Followers: ${res.data.followers}</p>
+                    <p class ="info">Following: ${res.data.following}</p>
+                </div>
+
+                <div class="infolinks">
+                    <p class ="info">Public Repos: ${res.data.public_repos}</p>
+                    <p class ="info">Stars:/Stars?</p>
+                </div>
                  </body>
                  </html>`;
   
       return writeFileAsync('index.html', hcHtml);
-                
-                // publicRepoStr = publicRepos.join('\n');
-                // console.log(publicRepoStr);       
+      };
              
     })
  })
+
+ 
             
             
 
