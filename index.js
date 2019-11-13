@@ -25,6 +25,9 @@ inquirer
         axios.get(queryUrl).then(res => {
       
                 const publicRepos = res.data.public_repos;
+                const userName = res.data.login;
+                const avatar = res.data.avatar_url;
+
                  // generate static html 
                  const hcHtml = `
                  <!DOCTYPE html>
@@ -36,7 +39,10 @@ inquirer
                  <title>Document</title>
                  </head>
                  <body>
+                 <h1>${res.data.login}</h1>
+                 <img src="${res.data.avatar_url}"</img>
                  <p>${res.data.public_repos}</p>
+                 <p>
                  </body>
                  </html>`;
   
