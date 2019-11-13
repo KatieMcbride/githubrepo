@@ -72,9 +72,9 @@ inquirer
                  </html>`;
   
       return writeFileAsync('index.html', hcHtml);
-      };
              
     })
+       
  })
 
  
