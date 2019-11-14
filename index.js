@@ -4,26 +4,9 @@ const fs = require("fs");
 const util = require('util');
 const HTML5ToPDF = require("html5-to-pdf");
 const path = require("path");
+const prompts = require('prompts');
 
 const writeFileAsync = util.promisify(fs.writeFile);
-
-const createPDF = async () => {
-    const html5ToPDF = new HTML5ToPDF({
-      inputPath: path.join(__dirname, "./index.html"),
-      outputPath: path.join(__dirname, "./github.pdf"),
-      include: [
-        path.join(__dirname, "./styles.css")
-      ],
-      options: { printBackground: true } 
-    });
-
-    await html5ToPDF.start();
-    await html5ToPDF.build();
-    await html5ToPDF.close();
-    console.log("DONE");
-    process.exit(0);
-    };
-createPDF();
 
 inquirer
     .prompt([
@@ -32,11 +15,17 @@ inquirer
         message: 'What is your GitHub name?',
         name: 'username',
         },
-        // {
-        // type: 'input',
-        // message: 'What is your favorite color?',
-        // color: 'color', 
-        // },
+        {
+            type: 'list',
+            name: 'color',
+            message: 'Pick your favorite color',
+            choices: [
+              { value: 'Red' },
+              { value: 'Green' },
+              { value: 'Blue' },
+              { value: 'Yellow' },
+            ],
+        }
     ])
     .then(({ username }) => {
         const queryUrl = `https://api.github.com/users/${username}`;
@@ -95,6 +84,24 @@ inquirer
         
 
  });
+
+//  const createPDF = async () => {
+//     const html5ToPDF = new HTML5ToPDF({
+//       inputPath: path.join(__dirname, "./index.html"),
+//       outputPath: path.join(__dirname, "./github.pdf"),
+//       include: [
+//         path.join(__dirname, "./style.css")
+//       ],
+//       options: { printBackground: true } 
+//     });
+
+//     await html5ToPDF.start();
+//     await html5ToPDF.build();
+//     await html5ToPDF.close();
+//     console.log("DONE");
+//     process.exit(0);
+//     };
+// createPDF();
 
  
             
