@@ -4,9 +4,10 @@ const fs = require("fs");
 const util = require('util');
 const HTML5ToPDF = require("html5-to-pdf");
 const path = require("path");
-const prompts = require('prompts');
 
 const writeFileAsync = util.promisify(fs.writeFile);
+
+
 
 inquirer
     .prompt([
@@ -16,15 +17,15 @@ inquirer
         name: 'username',
         },
         {
-            type: 'list',
-            name: 'color',
-            message: 'Pick your favorite color',
-            choices: [
-              { value: 'Red' },
-              { value: 'Green' },
-              { value: 'Blue' },
-              { value: 'Yellow' },
-            ],
+        type: 'list',
+        name: 'color',
+        message: 'Pick your favorite color', 
+        choices: [
+            { value: 'Red' },
+            { value: 'Green' },
+            { value: 'Blue' },
+            { value: 'Yellow' },
+          ],
         }
     ])
     .then(({ username }) => {
@@ -51,7 +52,7 @@ inquirer
                  <link rel="stylesheet" type="text/css" href="./style.css" />
                  <title>GitHub Repo Info</title>
                  </head>
-                 <body>
+                 <body id="background">
                  <h1 class="gitHubName" >${res.data.login}</h1>
                  <div class= "btnlinks">
                     <a class ="button" href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
@@ -81,27 +82,34 @@ inquirer
       return writeFileAsync('index.html', hcHtml);
              
     })
-        
-
+    createPDF();
+    // .then (({value}) =>{
+    //         var declaration = document.getElementById('background');
+    //         declaration.setProperty("background-color", `${value}`);
+      
+    // });
  });
 
-//  const createPDF = async () => {
-//     const html5ToPDF = new HTML5ToPDF({
-//       inputPath: path.join(__dirname, "./index.html"),
-//       outputPath: path.join(__dirname, "./github.pdf"),
-//       include: [
-//         path.join(__dirname, "./style.css")
-//       ],
-//       options: { printBackground: true } 
-//     });
+ const createPDF = async () => {
+    const html5ToPDF = new HTML5ToPDF({
+      inputPath: path.join(__dirname, "./index.html"),
+      outputPath: path.join(__dirname, "./github.pdf"),
+      include: [
+        path.join(__dirname, "./style.css")
+      ],
+      options: { printBackground: true } 
+    });
 
-//     await html5ToPDF.start();
-//     await html5ToPDF.build();
-//     await html5ToPDF.close();
-//     console.log("DONE");
-//     process.exit(0);
-//     };
-// createPDF();
+    await html5ToPDF.start();
+    await html5ToPDF.build();
+    await html5ToPDF.close();
+    console.log("DONE");
+    process.exit(0);
+    };
+    
+
+
+
 
  
             
