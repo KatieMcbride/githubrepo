@@ -14,19 +14,23 @@ body{
 }
 
 .background-blue{
-    background-color: blue;
+    background-color: #101357;
 }
 
 .background-green{
-    background-color: green;
+    background-color: #3d7c47;
 }
 
 .background-red{
-    background-color: red;
+    background-color: #ff3a22;
 }
 
 .background-yellow{
-    background-color: yellow;
+    background-color: #fbaf08;
+}
+
+.background-pink{
+    background-color: #fea49f;
 }
 
 .button:hover {      
@@ -54,9 +58,9 @@ body{
 }
 
 .gitHubName{
-    background-color: lightgray;
+    background-color: rgb(243, 230, 230);
     width: 100%;
-    padding: 40px;
+    padding: 50px;
     text-align: center;
 }
 

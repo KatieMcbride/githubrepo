@@ -25,6 +25,7 @@ inquirer
             { value: 'green' },
             { value: 'blue' },
             { value: 'yellow' },
+            { value: 'pink' },
           ],
         }
     ])
@@ -38,7 +39,7 @@ inquirer
                 const avatar = res.data.avatar_url;
                 const location = res.data.location;
                 const gitHub = res.data.login;
-
+                console.log(res);
                  // generate static html 
                  const hcHtml = `
                  <!DOCTYPE html>
@@ -53,7 +54,7 @@ inquirer
                  <title>GitHub Repo Info</title>
                  </head>
                  <body class="background-${color}">
-                 <h1 class="gitHubName" >${res.data.login}</h1>
+                 <h1 class="gitHubName" >Username: ${res.data.login}</h1>
                  <div class= "btnlinks">
                     <a class ="button" href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
                     <a class ="button" href ="https://github.com/${res.data.login}">GitHub Link</a>
@@ -74,7 +75,7 @@ inquirer
 
                 <div class="infolinks">
                     <p class ="info">Public Repos: ${res.data.public_repos}</p>
-                    <p class ="info">Stars:/Stars?</p>
+                    <p class ="info">Stars: ${res.data.starred_url}</p>
                 </div>
                  </body>
                  </html>`;
