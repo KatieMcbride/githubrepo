@@ -33,6 +33,10 @@ body{
     background-color: #fea49f;
 }
 
+.background-purple{
+    background-color: #431c5d;
+}
+
 .button:hover {      
     background-color: #008CBA;      
     color: white; 

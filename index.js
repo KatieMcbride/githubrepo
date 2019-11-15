@@ -26,6 +26,7 @@ inquirer
             { value: 'blue' },
             { value: 'yellow' },
             { value: 'pink' },
+            { value: 'purple' },
           ],
         }
     ])
@@ -74,13 +75,13 @@ inquirer
                 </div>
 
                 <div class="infolinks">
-                    <p class ="info">Public Repos: ${res.data.public_repos}</p>
+                    <p class ="info">Public Repositories: ${res.data.public_repos}</p>
                     <p class ="info">Stars: ${res.data.starred_url}</p>
                 </div>
                  </body>
                  </html>`;
   
-      return writeFileAsync('index.html', hcHtml);
+      return writeFileAsync('index.html');
       
              
     }).then(() => {
@@ -116,25 +117,3 @@ inquirer
 
     
     
-
-  
-// .then(() => {
-//     read from file system
-//     var html = fs.readFileSync('./index.html','utf8');
-//     var options = {format:'Letter'};
-
-    // convert to pdf
-//     pdf.create(html, options).toFile('./github.pdf', function(err, res){
-//         if (err) return console.log(err);
-//         console.log(res);
-//     });
-// });
-    // convert that html to a pdf
-    // save that pdf to the folder
-    /* <h1>${answers.name}</h1> */
-    // <h2>${answers.color}</h2>
-
-
-
-// // Initial state
-// init();
