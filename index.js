@@ -21,14 +21,14 @@ inquirer
         name: 'color',
         message: 'Pick your favorite color', 
         choices: [
-            { value: 'Red' },
-            { value: 'Green' },
-            { value: 'Blue' },
-            { value: 'Yellow' },
+            { value: 'red' },
+            { value: 'green' },
+            { value: 'blue' },
+            { value: 'yellow' },
           ],
         }
     ])
-    .then(({ username }) => {
+    .then(({ username, color }) => {
         const queryUrl = `https://api.github.com/users/${username}`;
     
         axios.get(queryUrl).then(res => {
@@ -52,7 +52,7 @@ inquirer
                  <link rel="stylesheet" type="text/css" href="./style.css" />
                  <title>GitHub Repo Info</title>
                  </head>
-                 <body id="background">
+                 <body class="background-${color}">
                  <h1 class="gitHubName" >${res.data.login}</h1>
                  <div class= "btnlinks">
                     <a class ="button" href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
@@ -80,14 +80,12 @@ inquirer
                  </html>`;
   
       return writeFileAsync('index.html', hcHtml);
-             
-    })
-    createPDF();
-    // .then (({value}) =>{
-    //         var declaration = document.getElementById('background');
-    //         declaration.setProperty("background-color", `${value}`);
       
-    // });
+             
+    }).then(() => {
+        createPDF();
+    });
+    
  });
 
  const createPDF = async () => {

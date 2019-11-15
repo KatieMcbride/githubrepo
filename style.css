@@ -13,9 +13,21 @@ body{
     background-color: white;
 }
 
-/* --.bluebackground{
+.background-blue{
     background-color: blue;
-} */
+}
+
+.background-green{
+    background-color: green;
+}
+
+.background-red{
+    background-color: red;
+}
+
+.background-yellow{
+    background-color: yellow;
+}
 
 .button:hover {      
     background-color: #008CBA;      
