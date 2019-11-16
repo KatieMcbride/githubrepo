@@ -30,17 +30,25 @@ inquirer
           ],
         }
     ])
-    .then(({ username, color }) => {
-        const queryUrl = `https://api.github.com/users/${username}`;
-    
-        axios.get(queryUrl).then(res => {
+    .then(async ({ username, color }) => {
+        const queryURL1 = `https://api.github.com/users/${username}`;
+        const queryURL2 = `https://api.github.com/users/${username}/repos`;
+
       
-                const publicRepos = res.data.public_repos;
-                const userName = res.data.login;
-                const avatar = res.data.avatar_url;
-                const location = res.data.location;
-                const gitHub = res.data.login;
-                console.log(res);
+        const res1 = await axios.get(queryURL1)
+        const res2 = await axios.get(queryURL2)
+
+        const stars =  res2.data.reduce((acc, curr) => {
+            acc += curr.stargazers_count;
+            return acc;
+                }, 0);
+      
+                // const publicRepos = res.data.public_repos;
+                // const userName = res.data.login;
+                // const avatar = res.data.avatar_url;
+                // const location = res.data.location;
+                // const gitHub = res.data.login;
+                console.log(stars);
                  // generate static html 
                  const hcHtml = `
                  <!DOCTYPE html>
@@ -55,40 +63,44 @@ inquirer
                  <title>GitHub Repo Info</title>
                  </head>
                  <body class="background-${color}">
-                 <h1 class="gitHubName" >Username: ${res.data.login}</h1>
+                 <h1 class="gitHubName" >Username: ${res1.data.login}</h1>
                  <div class= "btnlinks">
-                    <a class ="button" href="https://www.google.com/maps/place/${res.data.location}">Google Maps Link</a>
-                    <a class ="button" href ="https://github.com/${res.data.login}">GitHub Link</a>
-                     <a class ="button" href ="${res.data.blog}">Blog Link</a>
+                    <a class ="button" href="https://www.google.com/maps/place/${res1.data.location}">Google Maps Link</a>
+                    <a class ="button" href ="https://github.com/${res1.data.login}">GitHub Link</a>
+                     <a class ="button" href ="${res1.data.blog}">Blog Link</a>
                 </div>
                  <div class="imagePlacer">
-                    <img class="image" src= "${res.data.avatar_url}"  height="250" width="250"></img>
+                    <img class="image" src= "${res1.data.avatar_url}"  height="250" width="250"></img>
                 </div>    
                 
                 <div class="infolinks">
-                    <p class ="info">Bio: ${res.data.bio}</p>
+                    <p class ="info">Bio: ${res1.data.bio}</p>
                 </div>
 
                 <div class="infolinks">
-                    <p class ="info">Followers: ${res.data.followers}</p>
-                    <p class ="info">Following: ${res.data.following}</p>
+                    <p class ="info">Followers: ${res1.data.followers}</p>
+                    <p class ="info">Following: ${res1.data.following}</p>
                 </div>
 
                 <div class="infolinks">
-                    <p class ="info">Public Repositories: ${res.data.public_repos}</p>
-                    <p class ="info">Stars: ${res.data.starred_url}</p>
+                    <p class ="info">Public Repositories: ${res1.data.public_repos}</p>
+                    <p class ="info">Stars: ${stars}</p>
                 </div>
                  </body>
                  </html>`;
   
-      return writeFileAsync('index.html');
+      return writeFileAsync('index.html', hcHtml, (err, result) => {
+          if(err) {
+              console.log(err)
+          }
+      });
       
              
     }).then(() => {
         createPDF();
     });
     
- });
+
 
  const createPDF = async () => {
     const html5ToPDF = new HTML5ToPDF({
@@ -107,6 +119,8 @@ inquirer
     process.exit(0);
     };
     
+
+   
 
 
 
